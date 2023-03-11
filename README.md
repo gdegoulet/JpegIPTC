@@ -119,3 +119,5 @@ test.jpg:
 ```
 
 As you can see, IPTC Envelope has vanished .. :( for now ..
+
+**since 0.3 : ALL IPTC data (record 1 and 2 from APP13) are raw copied**
