@@ -1,6 +1,28 @@
 # JpegIPTC
 
-## Example
+## About:
+This program is related with https://github.com/gdegoulet/thumbor-piliptc-engine
+
+The purpose is to extract APP13 (iptc data) from image and raw copy APP13 to another image
+
+**Original image with IPTC tags --> thumbor transformation --> new image with original IPTC tags**
+
+## Credit:
+```
+# Ported from James Campbell iptcinfo3 https://github.com/james-see/iptcinfo3 
+# Ported from Josh Carter's Perl IPTCInfo.pm by Tamás Gulácsi
+#
+# IPTCInfo: extractor for IPTC metadata embedded in images
+# Copyright (C) 2000-2004 Josh Carter <josh@multipart-mixed.com>
+# Copyright (C) 2004-2008 Tamás Gulácsi <gthomas@gthomas.hu>
+# All rights reserved.
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the same terms as Python itself.
+
+```
+
+## Example:
 See test.py : we fetch iptc tags from file 76bde3fc961f0fa8733756922d1e2ed06311d804ec38b89dc60d6ba36d30e046.jpg and we add it to P1000056.jpg
 
 ```python
