@@ -1,3 +1,24 @@
+# -*- coding: utf-8 -*-
+# vim: fenc=utf-8 fileformat=unix:
+# Author: 2023 Guillaume Degoulet <jpegiptc@degoulet.net>
+#
+# Ported from James Campbell iptcinfo3 https://github.com/james-see/iptcinfo3 
+# Ported from Josh Carter's Perl IPTCInfo.pm by Tamás Gulácsi
+#
+# IPTCInfo: extractor for IPTC metadata embedded in images
+# Copyright (C) 2000-2004 Josh Carter <josh@multipart-mixed.com>
+# Copyright (C) 2004-2008 Tamás Gulácsi <gthomas@gthomas.hu>
+# All rights reserved.
+#
+# This program is related with https://github.com/gdegoulet/thumbor-piliptc-engine
+# The purpose is to extract APP13 (iptc data) from image and raw copy APP13 to another image
+# Original image with IPTC tags --> thumbor transformation --> new image with original IPTC tags 
+#
+# This program is free software; you can redistribute it and/or modify
+# it under the same terms as Python itself.
+#
+# VERSION = '0.1';
+
 from io import BytesIO
 import contextlib
 import os
