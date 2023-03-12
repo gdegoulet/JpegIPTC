@@ -17,7 +17,7 @@
 # This program is free software; you can redistribute it and/or modify
 # it under the same terms as Python itself.
 #
-# VERSION = '1.0';
+# VERSION = '1.1';
 
 from io import BytesIO
 import contextlib
@@ -27,6 +27,10 @@ import sys
 import tempfile
 from struct import pack, unpack
 import json
+
+__version__ = '1.1'
+__author__ = 'Guillaume Degoulet'
+__updated_by__ = 'Guillaume Degoulet'
 
 class EOFException(Exception):
     def __init__(self, *args):
