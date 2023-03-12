@@ -137,4 +137,4 @@ As you can see, IPTC Envelope has vanished .. :( for now ..
 
 **since 0.3 : ALL IPTC data (record 1 and 2 from APP13) are raw copied**
 
-**since 1.0 : Searching for IPTC data only if input is regulat jpeg file**
+**since 1.0 : Searching for IPTC data only if input is regular jpeg file**
