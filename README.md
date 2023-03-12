@@ -105,6 +105,16 @@ iptc test.jpg
 test.jpg:
  Tag      Name                 Type      Size  Value
  -------- -------------------- --------- ----  -----
+ 1:000    Model Version        Short        2  2
+ 1:020    File Format          Short        2  1
+ 1:022    File Version         Short        2  2
+ 1:030    Service Identifier   String       9  AFP-PHOTO
+ 1:040    Envelope Number      NumString    8  12345678
+ 1:060    Envelope Priority    NumString    1  5
+ 1:070    Date Sent            Date         8  20221120
+ 1:080    Time Sent            Time        11  210118+0000
+ 1:090    Coded Character Set  Binary       3  1b 2d 41
+ 1:100    Unique Name of Objec String      11  AFP_32PC4R2
  2:000    Record Version       Short        2  2
  2:005    Object Name          String      27  UKRAINE-RUSSIA-WAR-CONFLICT
  2:010    Urgency              NumString    1  5
