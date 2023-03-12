@@ -22,6 +22,18 @@ The purpose is to extract APP13 (iptc data) from image and raw copy APP13 to ano
 
 ```
 
+## Functions:
+
+- load_from_file(filename) : initialize object from file location (return booleans)
+- load_from_binarydata(rawdata) : initialize object from binary string (return booleans) **(for thumbor integration)**
+- save() : for object initialized with load_from_file : overwrite with new content (return booleans)
+- save_as(output_filename) : write/overwrite new content to output_filename (return booleans)
+- get_raw_iptc() : return raw iptc as binary string **(for thumbor integration)**
+- set_raw_iptc(rawdata) : write new iptc binary string as raw_iptc properties of current object **(for thumbor integration)**
+- dump() : like save but only return image as binary string **(for thumbor integration)**
+- is_jpeg() : return booleans
+
+
 ## Example:
 See test.py : we fetch iptc tags from file 76bde3fc961f0fa8733756922d1e2ed06311d804ec38b89dc60d6ba36d30e046.jpg and we add it to P1000056.jpg
 
@@ -35,9 +47,12 @@ See test.py : we fetch iptc tags from file 76bde3fc961f0fa8733756922d1e2ed06311d
     with open(destination, "rb") as file:
       results = file.read()
 
-    jpegiptc_object = JpegIPTC(buffer)
-    jpegiptc_object_d = JpegIPTC(results)
-    jpegiptc_object_d.set_raw_iptc(jpegiptc_object.raw_iptc)
+    jpegiptc_object = JpegIPTC()
+    jpegiptc_object.load_from_binarydata(buffer)
+    jpegiptc_object_d = JpegIPTC()
+    jpegiptc_object_d.load_from_binarydata(results)
+
+    jpegiptc_object_d.set_raw_iptc(jpegiptc_object.get_raw_iptc())
     newresults = jpegiptc_object_d.dump()
     
     with open(outputfile, "wb") as binary_file:
@@ -121,3 +136,5 @@ test.jpg:
 As you can see, IPTC Envelope has vanished .. :( for now ..
 
 **since 0.3 : ALL IPTC data (record 1 and 2 from APP13) are raw copied**
+
+**since 1.0 : Searching for IPTC data only if input is regulat jpeg file**
