@@ -17,7 +17,7 @@
 # This program is free software; you can redistribute it and/or modify
 # it under the same terms as Python itself.
 #
-# VERSION = '0.1';
+# VERSION = '0.2';
 
 from io import BytesIO
 import contextlib
@@ -42,13 +42,6 @@ class JpegIPTC:
                     0xd9: "Marker scan hit EOI (end of image) marker",
                     0xda: "Marker scan hit start of image data"}
 
-    c_charset = {100: 'iso8859_1', 101: 'iso8859_2', 109: 'iso8859_3',
-                 110: 'iso8859_4', 111: 'iso8859_5', 125: 'iso8859_7',
-                 127: 'iso8859_6', 138: 'iso8859_8',
-                 196: 'utf_8'}
-    c_charset_r = {v: k for k, v in c_charset.items()}
-    
-    
     def _ord3(self,x):
         return x if isinstance(x, int) else ord(x)
 
@@ -112,6 +105,9 @@ class JpegIPTC:
 
     def _jpegScan(self,bytesio_obj):
         SOI = 0xd8  # Start of image
+        APP0 = 0xe0  # Exif
+        APP1 = 0xe1  # Exif
+        APP13 = 0xed  # Photoshop3 IPTC
         # Skip past start of file marker
         try:
             (ff, soi) = self._read_exactly(bytesio_obj, 2)
@@ -124,7 +120,7 @@ class JpegIPTC:
         while True:
             err = None
             marker = self._jpeg_next_marker(bytesio_obj)
-            if self._ord3(marker) == 0xed: # 0xed # Photoshop3 IPTC (APP13)
+            if self._ord3(marker) == APP13:
                 break  # 237
 
             err = self.c_marker_err.get(self._ord3(marker), None)
@@ -147,20 +143,7 @@ class JpegIPTC:
                 # if we found that, look for record 2, dataset 0
                 # (record version number)
                 (record, dataset) = bytesio_obj.read(2)
-                if record == 1 and dataset == 90:
-                    # found character set's record!
-                    try:
-                        temp = self._read_exactly(bytesio_obj, self._jpeg_get_variable_length(bytesio_obj))
-                        try:
-                            cs = unpack('!H', temp)[0]
-                        except Exception:  # TODO better exception
-                            cs = None
-                        if cs in self.c_charset:
-                            self.inp_charset = self.c_charset[cs]
-                    except EOFException:
-                        pass
-
-                elif record == 2:
+                if record == 1 or record == 2:
                     # found it. seek to start of this tag and return.
                     try:  # seek rel to current position
                         self._seek_exactly(bytesio_obj, -3)
@@ -219,8 +202,7 @@ class JpegIPTC:
             bio.write(header)
 
             (tag, record, dataset, length) = unpack("!BBBH", header)
-            # bail if we're past end of IIM record 2 data
-            if not (tag == 0x1c and record == 2):
+            if record > 2:
                 return bio
             value = bytesio_obj.read(length)
             bio.write(value)
