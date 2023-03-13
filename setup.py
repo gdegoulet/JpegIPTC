@@ -15,7 +15,7 @@ Topic :: Utilities
 """
 
 this_directory = path.abspath(path.dirname(__file__))
-with open(path.join(this_directory, 'README.rst')) as f:
+with open(path.join(this_directory, 'README.md')) as f:
     long_description = f.read()
 
 if sys.version_info < (2, 3):
@@ -49,15 +49,16 @@ setup(  # cmdclass={'sdist': sdist},
     name='JpegIPTC',
     version=version,
     url='https://github.com/gdegoulet/JpegIPTC',
-    download_url='https://github.com/gdegoulet/JpegIPTC',
+    download_url='https://github.com/gdegoulet/JpegIPTC/archive/v1.3.tar.gz',
     author='Guillaume Degoulet',
     author_email='jpegiptc@degoulet.net',
     maintainer='Guillaume Degoulet',
     maintainer_email='jpegiptc@degoulet.net',
+    long_description_content_type='text/markdown',
     long_description=long_description,
     license='http://www.opensource.org/licenses/gpl-license.php',
     platforms=['any'],
-    description="""JpegIPTC raw functions""",
+    description="""Jpeg Iptc data raw extract/copy""",
     classifiers=[_f for _f in classifiers.split('\n') if _f],
     py_modules=['JpegIPTC'],
     )

@@ -17,8 +17,6 @@
 # This program is free software; you can redistribute it and/or modify
 # it under the same terms as Python itself.
 #
-# VERSION = '1.1';
-
 from io import BytesIO
 import contextlib
 import os
@@ -28,7 +26,7 @@ import tempfile
 from struct import pack, unpack
 import json
 
-__version__ = '1.1'
+__version__ = '1.4'
 __author__ = 'Guillaume Degoulet'
 __updated_by__ = 'Guillaume Degoulet'
 
@@ -136,7 +134,6 @@ class JpegIPTC:
         return self._blindScan(bytesio_obj, MAX=self._jpeg_get_variable_length(bytesio_obj))
 
     def _blindScan(self,bytesio_obj,MAX=819200):
-        # https://help.accusoft.com/ImageGear-Net/v25.0/Windows/HTML/IPTC_Non-Image_Data_Structure.html
         offset = 0
         while offset <= MAX:
             try:
@@ -173,7 +170,8 @@ class JpegIPTC:
         if self.is_jpeg:
             return self._jpegScan(bytesio_obj)
         else:
-            # seems to be something else than a regulat jpeg file, we don't want to loose time for blindScan
+            # seems to be something else than a regulat jpeg file, 
+            # we don't want to loose time for blindScan
             #return self._blindScan(bytesio_obj)
             return False
 
