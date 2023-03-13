@@ -7,6 +7,9 @@ The purpose is to extract APP13 (iptc data) from image and raw copy APP13 to ano
 
 **Original image with IPTC tags --> thumbor transformation --> new image with original IPTC tags**
 
+## IPTC tags :
+JPEG IPTC (International Press Telecommunications Council) tags are a set of metadata that can be embedded into JPEG image files to provide information about the image content, including ownership and copyright information. These tags can be used by photographers, artists, and publishers to identify their work and protect their intellectual property rights. By including IPTC tags in their JPEG images, creators can ensure that their ownership and copyright information is attached to their work and remains with it as it is shared and distributed across the internet. This can be particularly important for photographers and other creators who rely on their work to generate income, as it can help deter unauthorized use and ensure that they are properly credited for their work. In this way, JPEG IPTC tags can play an essential role in protecting the intellectual property of creators and maintaining the integrity of their work.
+
 ## Credit:
 ```
 # Ported from James Campbell iptcinfo3 https://github.com/james-see/iptcinfo3 
