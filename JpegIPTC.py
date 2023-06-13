@@ -26,7 +26,7 @@ import tempfile
 from struct import pack, unpack
 import json
 
-__version__ = '1.4'
+__version__ = '1.5'
 __author__ = 'Guillaume Degoulet'
 __updated_by__ = 'Guillaume Degoulet'
 
