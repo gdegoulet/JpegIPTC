@@ -389,9 +389,10 @@ class JpegIPTC:
         if otherparts is not None:
             resourceBlock.append(otherparts)
         resourceBlock = b''.join(resourceBlock)
-        out.append(pack("BB", 0xff, APP13))  # Jpeg start of block, APP13
-        out.append(pack("!H", len(resourceBlock) + 2))  # length
-        out.append(resourceBlock)
+        if (len(resourceBlock) + 2) <= 65535:
+            out.append(pack("BB", 0xff, APP13))  # Jpeg start of block, APP13
+            out.append(pack("!H", len(resourceBlock) + 2))  # length
+            out.append(resourceBlock)
         return b''.join(out)
 
     def __del__(self):
