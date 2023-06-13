@@ -8,6 +8,7 @@ if __name__ == '__main__':  # pragma: no cover
     print("")
     print("TEST 1")
     source = "76bde3fc961f0fa8733756922d1e2ed06311d804ec38b89dc60d6ba36d30e046.jpg"
+    source = "strange.jpg"
     destination = "P1000056.jpg"
     outputfile = "test.jpg"
 
