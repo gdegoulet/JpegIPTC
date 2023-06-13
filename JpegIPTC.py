@@ -204,14 +204,19 @@ class JpegIPTC:
                 header = self._read_exactly(bytesio_obj, 5)
             except EOFException:
                 return bio
-            bio.write(header)
 
             (tag, record, dataset, length) = unpack("!BBBH", header)
             if record > 2:
+                #print(bio.getvalue())
                 return bio
-            value = bytesio_obj.read(length)
-            bio.write(value)
+            if tag == 28:
+                value = bytesio_obj.read(length)
+                #print(tag,record,length)
+                #print(value)
+                bio.write(header)
+                bio.write(value)
 
+        #print(bio.getvalue())
         return bio
 
     def _collect_adobe_parts(self,data):
@@ -389,6 +394,7 @@ class JpegIPTC:
         if otherparts is not None:
             resourceBlock.append(otherparts)
         resourceBlock = b''.join(resourceBlock)
+        #print(len(resourceBlock) + 2)
         if (len(resourceBlock) + 2) <= 65535:
             out.append(pack("BB", 0xff, APP13))  # Jpeg start of block, APP13
             out.append(pack("!H", len(resourceBlock) + 2))  # length
@@ -422,6 +428,7 @@ class JpegIPTC:
                 bytesio_obj = file.read()
                 self.bytesio_obj = bytesio_obj
                 self._fetch_iptc(bytesio_obj)
+                #print(len(self.raw_iptc))
                 return True
         except:
             return False
